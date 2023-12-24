@@ -28,35 +28,35 @@ pizzaJson.map((item, index) => {
 
     // adicionar o evento de click ao clicar na pizza e abrir a modal
     pizzaItem.querySelector('.pizza-item a').addEventListener('click', (event) => {
-       event.preventDefault();
+        event.preventDefault();
 
-       // procurar o elemento mais proximo que tenha a classe .pizza-item
-       let key = event.target.closest('.pizza-item').getAttribute('data-key');
-       modalQtd = 1;
-       modalKey = key;
+        // procurar o elemento mais proximo que tenha a classe .pizza-item
+        let key = event.target.closest('.pizza-item').getAttribute('data-key');
+        modalQtd = 1;
+        modalKey = key;
 
-       query('.pizzaBig img').src = pizzaJson[key].img;
-       query('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
-       query('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
-       query('.pizzaInfo--size.selected').classList.remove('selected');
-       queryAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
-           if (sizeIndex === 2) {
-               size.classList.add('selected');
-           }
-           size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
-       });
+        query('.pizzaBig img').src = pizzaJson[key].img;
+        query('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
+        query('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
+        query('.pizzaInfo--size.selected').classList.remove('selected');
+        queryAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
+            if (sizeIndex === 2) {
+                size.classList.add('selected');
+            }
+            size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
+        });
 
-       query('.pizzaInfo--actualPrice').innerHTML = pizzaJson[key].price.toLocaleString('pt-br', {
-           minimumFractionDigits: 2, style: 'currency', currency: 'BRL'
-       });
+        query('.pizzaInfo--actualPrice').innerHTML = pizzaJson[key].price.toLocaleString('pt-br', {
+            minimumFractionDigits: 2, style: 'currency', currency: 'BRL'
+        });
 
-       query('.pizzaInfo--qt').innerHTML = modalQtd;
+        query('.pizzaInfo--qt').innerHTML = modalQtd;
 
-       query('.pizzaWindowArea').style.opacity = 0;
-       query('.pizzaWindowArea').style.display = 'flex';
-       setTimeout(() => {
-          query('.pizzaWindowArea').style.opacity = 1;
-       }, 200);
+        query('.pizzaWindowArea').style.opacity = 0;
+        query('.pizzaWindowArea').style.display = 'flex';
+        setTimeout(() => {
+            query('.pizzaWindowArea').style.opacity = 1;
+        }, 200);
     });
     // --- fim modal ---
 
@@ -75,8 +75,8 @@ function closeModal() {
 // ação para poder fechar o modal ao clicar no cancel ou voltar
 queryAll('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton')
     .forEach((item) => {
-    item.addEventListener('click', closeModal);
-});
+        item.addEventListener('click', closeModal);
+    });
 
 // ação para poder diminuir a qtd de pizza adicionada ao carrinho
 query('.pizzaInfo--qtmenos').addEventListener('click', () => {
@@ -95,10 +95,10 @@ query('.pizzaInfo--qtmais').addEventListener('click', () => {
 
 // ação para mudar o tamanho da pizza
 queryAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
-   size.addEventListener('click', (e) => {
-      query('.pizzaInfo--size.selected').classList.remove('selected');
-      size.classList.add('selected');
-   });
+    size.addEventListener('click', (e) => {
+        query('.pizzaInfo--size.selected').classList.remove('selected');
+        size.classList.add('selected');
+    });
 });
 
 // ação no botão adicionar no carrinho
@@ -110,7 +110,7 @@ query('.pizzaInfo--addButton').addEventListener('click', () => {
     let identifier = pizzaJson[modalKey].id + '@' + size;
 
     let key = cart.findIndex((item) => {
-       return item.identifier === identifier;
+        return item.identifier === identifier;
     });
 
     // verificar se o item já esta acicionado, se estiver, inclui mais
