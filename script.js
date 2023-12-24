@@ -90,3 +90,11 @@ query('.pizzaInfo--qtmais').addEventListener('click', () => {
     modalQtd++;
     query('.pizzaInfo--qt').innerHTML = modalQtd;
 });
+
+// ação para mudar o tamanho da pizza
+queryAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
+   size.addEventListener('click', (e) => {
+      query('.pizzaInfo--size.selected').classList.remove('selected');
+      size.classList.add('selected');
+   });
+});
