@@ -75,3 +75,18 @@ queryAll('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton')
     .forEach((item) => {
     item.addEventListener('click', closeModal);
 });
+
+// ação para poder diminuir a qtd de pizza adicionada ao carrinho
+query('.pizzaInfo--qtmenos').addEventListener('click', () => {
+    if (modalQtd > 1) {
+        modalQtd--;
+        query('.pizzaInfo--qt').innerHTML = modalQtd;
+    }
+
+});
+
+// ação para poder aumentar a qtd de pizza adicionada ao carrinho
+query('.pizzaInfo--qtmais').addEventListener('click', () => {
+    modalQtd++;
+    query('.pizzaInfo--qt').innerHTML = modalQtd;
+});
