@@ -1,3 +1,4 @@
+let cart = [];
 let modalQtd = 1;
 const query = (element) => {
     return document.querySelector(element);
@@ -32,6 +33,7 @@ pizzaJson.map((item, index) => {
        // procurar o elemento mais proximo que tenha a classe .pizza-item
        let key = event.target.closest('.pizza-item').getAttribute('data-key');
        modalQtd = 1;
+       modalKey = key;
 
        query('.pizzaBig img').src = pizzaJson[key].img;
        query('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
@@ -97,4 +99,34 @@ queryAll('.pizzaInfo--size').forEach((size, sizeIndex) => {
       query('.pizzaInfo--size.selected').classList.remove('selected');
       size.classList.add('selected');
    });
+});
+
+// ação no botão adicionar no carrinho
+query('.pizzaInfo--addButton').addEventListener('click', () => {
+    // saber a quantidade de pizzas
+    let size = parseInt(query('.pizzaInfo--size.selected').getAttribute('data-key'));
+
+    // gerar identificador para quando adicionar mais pizza do mesmo, incluir a qtd no carrinho
+    let identifier = pizzaJson[modalKey].id + '@' + size;
+
+    let key = cart.findIndex((item) => {
+       return item.identifier === identifier;
+    });
+
+    // verificar se o item já esta acicionado, se estiver, inclui mais
+    if (key > -1) {
+        cart[key].qtd += modalQtd;
+    } else { // se não, adiciona mais um no carrinho
+
+        // adicionando todos as informaçoes no carrinho
+        cart.push({
+            identifier,
+            id: pizzaJson[modalKey].id,
+            size,
+            qtd: modalQtd
+        });
+    }
+
+    // fechar o mados após adicionar a pizza a carrinho
+    closeModal();
 });
