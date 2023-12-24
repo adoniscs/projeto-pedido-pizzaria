@@ -127,6 +127,51 @@ query('.pizzaInfo--addButton').addEventListener('click', () => {
         });
     }
 
+    // atualizar o carrinho antes de fechar
+    updateCart();
+
     // fechar o mados após adicionar a pizza a carrinho
     closeModal();
 });
+
+// função para atualizar o carrinho
+function updateCart() {
+    // verificar se tem itens no carrinho, se tiver, mostrar o carrinho
+    if (cart.length > 0) {
+        query('aside').classList.add('show');
+
+        query('.cart').innerHTML = '';
+
+        // mostrar os itens que estão no carrinho
+        for (let i in cart) {
+            let pizzaItem = pizzaJson.find((item) => item.id === cart[i].id);
+            let cartItem = query('.models .cart--item').cloneNode(true);
+
+            let pizzaSizeName;
+            switch (cart[i].size) {
+                case 0:
+                    pizzaSizeName = 'P';
+                    break;
+
+                case 1:
+                    pizzaSizeName = 'M';
+                    break;
+
+                case 2:
+                    pizzaSizeName = 'G';
+                    break;
+            }
+
+            let pizzaName = `${pizzaItem.name} (${pizzaSizeName})`;
+            cartItem.querySelector('img').src = pizzaItem.img;
+            cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
+            cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qtd;
+
+            query('.cart').append(cartItem);
+
+        }
+
+    } else {// se não tiver, removerá a classe e esconderá o carrinho
+        query('aside').classList.remove('show');
+    }
+}
