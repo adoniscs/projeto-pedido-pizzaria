@@ -134,8 +134,23 @@ query('.pizzaInfo--addButton').addEventListener('click', () => {
     closeModal();
 });
 
+// faz com que o carrinho aparece quando for clicado no modo mobile
+query('.menu-openner').addEventListener('click', () => {
+    if (cart.length > 0) {
+        query('aside').style.left = '0';
+    }
+});
+
+query('.menu-closer').addEventListener('click', () => {
+   query('aside').style.left = '100vw';
+});
+
+
 // função para atualizar o carrinho
 function updateCart() {
+    // atualizar carrinho
+    query('.menu-openner span').innerHTML = cart.length;
+
     // verificar se tem itens no carrinho, se tiver, mostrar o carrinho
     if (cart.length > 0) {
         query('aside').classList.add('show');
@@ -207,7 +222,8 @@ function updateCart() {
         query('.desconto span:last-child').innerHTML = formatDesconto;
         query('.total span:last-child').innerHTML = formatTotal;
 
-    } else {// se não tiver, removerá a classe e esconderá o carrinho
+    } else {// se não tiver, removerá a classe e esconderá o carrinho no web
         query('aside').classList.remove('show');
+        query('aside').style.left = '100vw'; // no mobile
     }
 }
